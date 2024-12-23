@@ -1,8 +1,10 @@
+import React from "react";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
 import NextUIProvider from "@/components/provider/NextUIProvider";
+import Rocket from "@/components/icon/Rocket";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,7 +31,17 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <NextUIProvider>{children}</NextUIProvider>
+        <NextUIProvider>
+          <div className="flex min-h-screen justify-center pt-16">
+            <main className="flex w-1/2 flex-col gap-8">
+              <div className="flex items-center justify-center">
+                <Rocket />
+                <div className="text-2xl font-bold">Todo App</div>
+              </div>
+              {children}
+            </main>
+          </div>
+        </NextUIProvider>
       </body>
     </html>
   );
