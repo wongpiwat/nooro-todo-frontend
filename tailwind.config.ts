@@ -1,10 +1,12 @@
 import type { Config } from "tailwindcss";
+import { nextui } from "@nextui-org/react";
 
 export default {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
@@ -12,10 +14,12 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
         primary: {
+          DEFAULT: "#4EA8DE", // blue
           light: "#4EA8DE", // blue
           dark: "#1E6F9F", // blue-dark
         },
         secondary: {
+          DEFAULT: "#8284FA", // purple
           light: "#8284FA", // purple
           dark: "#5E60CE", // purple-dark
         },
@@ -40,5 +44,6 @@ export default {
       },
     },
   },
-  plugins: [],
+  darkMode: "class",
+  plugins: [nextui()],
 } satisfies Config;
