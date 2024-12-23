@@ -77,6 +77,7 @@ export default function Home() {
                 key={task.id}
                 id={task.id}
                 title={task.title}
+                color={task.color}
                 status={task.status}
                 onPress={() => handleGoToDetailView(task.id)}
                 onSelect={handleSelectTask}

@@ -1,12 +1,13 @@
 "use client";
 import React from "react";
-import { Button, Card, CardBody, Checkbox } from "@nextui-org/react";
+import { Button, Card, CardBody, Checkbox, cn } from "@nextui-org/react";
 import { HiOutlineTrash } from "react-icons/hi2";
 import { PressEvent } from "@react-types/shared";
 
 interface TaskCardProps {
   id: string;
   title: string;
+  color: string;
   status: boolean;
   onPress: (e: PressEvent) => void;
   onSelect: (id: string) => void;
@@ -16,11 +17,37 @@ interface TaskCardProps {
 const TaskCard = ({
   id,
   title,
+  color,
   status,
   onPress,
   onSelect,
   onDelete,
 }: TaskCardProps) => {
+  const getColor = (color: string) => {
+    switch (color) {
+      case "red":
+        return "group-data-[selected=true]:after:bg-red before:border-red";
+      case "orange":
+        return "group-data-[selected=true]:after:bg-orange before:border-orange";
+      case "yellow":
+        return "group-data-[selected=true]:after:bg-yellow before:border-yellow";
+      case "green":
+        return "group-data-[selected=true]:after:bg-green before:border-green";
+      case "blue":
+        return "group-data-[selected=true]:after:bg-blue before:border-blue";
+      case "purple":
+        return "group-data-[selected=true]:after:bg-purple before:border-purple";
+      case "pink":
+        return "group-data-[selected=true]:after:bg-pink before:border-pink";
+      case "brown":
+        return "group-data-[selected=true]:after:bg-brown before:border-brown";
+      default:
+        return "group-data-[selected=true]:after:bg-gray before:border-gray";
+    }
+  };
+
+  const colorStyle = getColor(color);
+
   return (
     <Card
       isPressable
@@ -31,8 +58,17 @@ const TaskCard = ({
         {/* Radio Button */}
         <div>
           <Checkbox
+            classNames={{
+              wrapper: cn(
+                `bg-transparent`,
+                `text-white`,
+                `group-data-[hover=true]:before:bg-opacity-20`,
+                `group-data-[hover=true]:after:bg-opacity-50`,
+                colorStyle,
+              ),
+            }}
             checked={status}
-            color="primary"
+            // color="primary"
             radius="full"
             aria-label="Select task"
             onClick={() => onSelect(id)}
