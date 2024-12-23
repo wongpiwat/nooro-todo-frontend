@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useState } from "react";
 import { Button as NextUIButton, Chip } from "@nextui-org/react";
 import { MdAddCircleOutline } from "react-icons/md";
@@ -12,9 +13,11 @@ import Rocket from "@/components/icon/Rocket";
 
 import Fade from "@/components/animation/Fade";
 import TextField from "@/components/text-field/TextField";
+import ColorPicker from "@/components/picker/ColorPicker";
 
 export default function Home() {
   const [openCreateTask, setOpenCreateTask] = useState(false);
+  const [selectedColor, setSelectedColor] = useState<string>("");
 
   const handleGoToCreateTask = () => {
     setOpenCreateTask(true);
@@ -42,6 +45,8 @@ export default function Home() {
 
   const isActiveFade = openCreateTask;
 
+  console.log("selectedColor", selectedColor);
+
   return (
     <div className="flex min-h-screen justify-center pt-16">
       <main className="flex w-1/2 flex-col gap-8">
@@ -67,6 +72,24 @@ export default function Home() {
                 placeholder="Ex. Brush you teeth"
                 onValueChange={handleChangeText}
               />
+
+              <div className="flex flex-row">
+                <ColorPicker
+                  value={selectedColor}
+                  items={[
+                    { value: "red", color: "red" },
+                    { value: "orange", color: "orange" },
+                    { value: "yellow", color: "yellow" },
+                    { value: "green", color: "green" },
+                    { value: "blue", color: "blue" },
+                    { value: "purple", color: "purple" },
+                    { value: "pink", color: "pink" },
+                    { value: "brown", color: "brown" },
+                  ]}
+                  onChange={(e) => setSelectedColor(e.target.value)}
+                  orientation="horizontal"
+                />
+              </div>
 
               <Button
                 onClick={handleCreateTask}
