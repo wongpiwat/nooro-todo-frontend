@@ -1,4 +1,6 @@
+"use client";
 import React from "react";
+import { Button as NextUIButton } from "@nextui-org/react";
 
 interface ButtonProps {
   children?: React.ReactNode;
@@ -18,14 +20,14 @@ const Button = ({
   endComponent,
 }: BaseButtonAttributes) => {
   return (
-    <button
-      className={`bg-primary-dark rounded-lg px-4 py-2 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2`}
-      onClick={onClick}
+    <NextUIButton
+      className={`hover:bg-blue-700 rounded-lg bg-primary-dark px-4 py-2 text-white`}
+      onPress={onClick}
     >
       {startComponent && startComponent}
       <span className="m-2 font-bold">{children}</span>
       {endComponent && endComponent}
-    </button>
+    </NextUIButton>
   );
 };
 
