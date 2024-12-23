@@ -52,7 +52,7 @@ const TaskCard = ({
   return (
     <Card
       isPressable
-      className="border-1 border-gray-400 bg-gray-500" // hover:bg-opacity-50
+      className="border-1 border-gray-400 bg-gray-500 hover:bg-opacity-50"
       onPress={onPress}
     >
       <CardBody className="flex flex-row">
@@ -61,10 +61,10 @@ const TaskCard = ({
           <Checkbox
             classNames={{
               wrapper: cn(
-                `bg-transparent`,
-                `text-white`,
-                `group-data-[hover=true]:before:bg-opacity-20`,
-                `group-data-[hover=true]:after:bg-opacity-50`,
+                "bg-transparent",
+                "text-white",
+                "group-data-[hover=true]:before:bg-opacity-20",
+                "group-data-[hover=true]:after:bg-opacity-50",
                 colorStyle,
               ),
             }}
@@ -84,7 +84,8 @@ const TaskCard = ({
         {/* Delete Icon */}
         <Button
           isIconOnly
-          className="bg-transparent text-gray-300 hover:text-opacity-40"
+          variant="light"
+          className={cn("bg-transparent", "text-gray-300", "hover:text-white")}
           onPress={() => onDelete(id)}
           aria-label="Delete task"
         >
