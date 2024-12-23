@@ -1,4 +1,5 @@
 "use client";
+
 import React from "react";
 import { Button, Card, CardBody, Checkbox, cn } from "@nextui-org/react";
 import { HiOutlineTrash } from "react-icons/hi2";
@@ -51,7 +52,7 @@ const TaskCard = ({
   return (
     <Card
       isPressable
-      className="border-1 border-gray-400 bg-gray-500"
+      className="border-1 border-gray-400 bg-gray-500" // hover:bg-opacity-50
       onPress={onPress}
     >
       <CardBody className="flex flex-row">
@@ -83,7 +84,7 @@ const TaskCard = ({
         {/* Delete Icon */}
         <Button
           isIconOnly
-          className="bg-transparent text-gray-300"
+          className="bg-transparent text-gray-300 hover:text-opacity-40"
           onPress={() => onDelete(id)}
           aria-label="Delete task"
         >
