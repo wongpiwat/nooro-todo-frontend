@@ -2,14 +2,14 @@ import React from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
 interface Props {
-  key: string;
+  id: string;
   children: React.ReactNode;
   isActive: boolean;
 }
 
-const Fade: React.FC<Props> = ({ key, children, isActive }) => {
+const Fade: React.FC<Props> = ({ id, children, isActive }) => {
   return (
-    <AnimatePresence key={key}>
+    <AnimatePresence key={id}>
       {isActive && (
         <motion.div
           initial={{ opacity: 0, x: 0 }}

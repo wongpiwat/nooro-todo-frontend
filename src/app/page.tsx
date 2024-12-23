@@ -51,7 +51,7 @@ export default function Home() {
         </div>
 
         {openCreateTask ? (
-          <Fade key="1" isActive={isActiveFade}>
+          <Fade id="1" isActive={isActiveFade}>
             <div className="flex flex-col gap-8">
               <NextUIButton
                 isIconOnly
@@ -77,7 +77,7 @@ export default function Home() {
             </div>
           </Fade>
         ) : (
-          <Fade key="2" isActive={true}>
+          <Fade id="2" isActive={true}>
             <div className="flex flex-col gap-8">
               <Button
                 onClick={handleGoToCreateTask}
