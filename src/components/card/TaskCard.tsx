@@ -2,18 +2,31 @@
 import React from "react";
 import { Button, Card, CardBody, Checkbox } from "@nextui-org/react";
 import { HiOutlineTrash } from "react-icons/hi2";
+import { PressEvent } from "@react-types/shared";
 
 interface TaskCardProps {
   id: string;
   title: string;
   status: boolean;
+  onPress: (e: PressEvent) => void;
   onSelect: (id: string) => void;
   onDelete: (id: string) => void;
 }
 
-const TaskCard = ({ id, title, status, onSelect, onDelete }: TaskCardProps) => {
+const TaskCard = ({
+  id,
+  title,
+  status,
+  onPress,
+  onSelect,
+  onDelete,
+}: TaskCardProps) => {
   return (
-    <Card className="border-1 border-gray-400 bg-gray-500">
+    <Card
+      isPressable
+      className="border-1 border-gray-400 bg-gray-500"
+      onPress={onPress}
+    >
       <CardBody className="flex flex-row">
         {/* Radio Button */}
         <div>

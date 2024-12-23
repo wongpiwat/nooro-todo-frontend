@@ -16,15 +16,19 @@ import TextField from "@/components/text-field/TextField";
 import ColorPicker from "@/components/picker/ColorPicker";
 
 export default function Home() {
-  const [openCreateTask, setOpenCreateTask] = useState(false);
+  const [tab, setTab] = useState(0);
   const [selectedColor, setSelectedColor] = useState<string>("");
 
   const handleGoToCreateTask = () => {
-    setOpenCreateTask(true);
+    setTab(1);
+  };
+
+  const handleGoToDetailView = () => {
+    setTab(2);
   };
 
   const handleBackToList = () => {
-    setOpenCreateTask(false);
+    setTab(0);
   };
 
   const handleSelectTask = (id: string) => {
@@ -43,8 +47,6 @@ export default function Home() {
     console.log("Task Created!");
   };
 
-  const isActiveFade = openCreateTask;
-
   console.log("selectedColor", selectedColor);
 
   return (
@@ -55,52 +57,9 @@ export default function Home() {
           <div className="text-2xl font-bold">Todo App</div>
         </div>
 
-        {openCreateTask ? (
-          <Fade id="1" isActive={isActiveFade}>
-            <div className="flex flex-col gap-8">
-              <NextUIButton
-                isIconOnly
-                className="bg-transparent text-white"
-                onPress={handleBackToList}
-                aria-label="Back"
-              >
-                <MdArrowBack size={18} />
-              </NextUIButton>
-
-              <TextField
-                label="Title"
-                placeholder="Ex. Brush you teeth"
-                onValueChange={handleChangeText}
-              />
-
-              <div className="flex flex-row">
-                <ColorPicker
-                  value={selectedColor}
-                  items={[
-                    { value: "red", color: "red" },
-                    { value: "orange", color: "orange" },
-                    { value: "yellow", color: "yellow" },
-                    { value: "green", color: "green" },
-                    { value: "blue", color: "blue" },
-                    { value: "purple", color: "purple" },
-                    { value: "pink", color: "pink" },
-                    { value: "brown", color: "brown" },
-                  ]}
-                  onChange={(e) => setSelectedColor(e.target.value)}
-                  orientation="horizontal"
-                />
-              </div>
-
-              <Button
-                onClick={handleCreateTask}
-                endComponent={<MdAddCircleOutline size={18} />}
-              >
-                Add Task
-              </Button>
-            </div>
-          </Fade>
-        ) : (
-          <Fade id="2" isActive={true}>
+        {/* Todo list */}
+        {tab == 0 && (
+          <Fade id="0" isActive={true}>
             <div className="flex flex-col gap-8">
               <Button
                 onClick={handleGoToCreateTask}
@@ -148,6 +107,7 @@ export default function Home() {
                       id={task.id}
                       title={task.title}
                       status={task.status}
+                      onPress={handleGoToDetailView}
                       onSelect={handleSelectTask}
                       onDelete={handleDeleteTask}
                     />
@@ -163,6 +123,100 @@ export default function Home() {
                   </>
                 )}
               </div>
+            </div>
+          </Fade>
+        )}
+
+        {/* New task */}
+        {tab == 1 && (
+          <Fade id="1" isActive={true}>
+            <div className="flex flex-col gap-8">
+              <NextUIButton
+                isIconOnly
+                className="bg-transparent text-white"
+                onPress={handleBackToList}
+                aria-label="Back"
+              >
+                <MdArrowBack size={18} />
+              </NextUIButton>
+
+              <TextField
+                label="Title"
+                placeholder="Ex. Brush you teeth"
+                onValueChange={handleChangeText}
+              />
+
+              <div className="flex flex-row">
+                <ColorPicker
+                  value={selectedColor}
+                  items={[
+                    { value: "red", color: "red" },
+                    { value: "orange", color: "orange" },
+                    { value: "yellow", color: "yellow" },
+                    { value: "green", color: "green" },
+                    { value: "blue", color: "blue" },
+                    { value: "purple", color: "purple" },
+                    { value: "pink", color: "pink" },
+                    { value: "brown", color: "brown" },
+                  ]}
+                  onChange={(e) => setSelectedColor(e.target.value)}
+                  orientation="horizontal"
+                />
+              </div>
+
+              <Button
+                onClick={handleCreateTask}
+                endComponent={<MdAddCircleOutline size={18} />}
+              >
+                Add Task
+              </Button>
+            </div>
+          </Fade>
+        )}
+
+        {/* Detail view */}
+        {tab == 2 && (
+          <Fade id="2" isActive={true}>
+            <div className="flex flex-col gap-8">
+              <NextUIButton
+                isIconOnly
+                className="bg-transparent text-white"
+                onPress={handleBackToList}
+                aria-label="Back"
+              >
+                <MdArrowBack size={18} />
+              </NextUIButton>
+
+              <TextField
+                label="Title"
+                placeholder="Ex. Brush you teeth"
+                onValueChange={handleChangeText}
+              />
+
+              <div className="flex flex-row">
+                <ColorPicker
+                  value={selectedColor}
+                  items={[
+                    { value: "red", color: "red" },
+                    { value: "orange", color: "orange" },
+                    { value: "yellow", color: "yellow" },
+                    { value: "green", color: "green" },
+                    { value: "blue", color: "blue" },
+                    { value: "purple", color: "purple" },
+                    { value: "pink", color: "pink" },
+                    { value: "brown", color: "brown" },
+                  ]}
+                  onChange={(e) => setSelectedColor(e.target.value)}
+                  orientation="horizontal"
+                />
+              </div>
+
+              <Button
+                onClick={handleCreateTask}
+                endComponent={<MdAddCircleOutline size={18} />}
+              >
+                Save
+              </Button>
             </div>
           </Fade>
         )}
