@@ -11,7 +11,7 @@ const TextField = ({ label, placeholder, ...rest }: TextFieldType) => {
       labelPlacement="outside"
       placeholder={placeholder}
       classNames={{
-        label: ["!text-primary", "!dark:text-primary"],
+        label: ["!text-primary", "!dark:text-primary", "text-sm", "font-bold"],
         inputWrapper: [
           "bg-gray-500",
           "dark:bg-gray-500",

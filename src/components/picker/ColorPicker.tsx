@@ -69,7 +69,15 @@ const ColorPicker = ({
   ...rest
 }: ColorPickerType) => {
   return (
-    <RadioGroup label={label} value={value} onChange={onChange} {...rest}>
+    <RadioGroup
+      label={label}
+      value={value}
+      onChange={onChange}
+      {...rest}
+      classNames={{
+        label: ["!text-primary", "!dark:text-primary", "text-sm", "font-bold"],
+      }}
+    >
       {items.map((item) => (
         <Ellipse key={item.value} color={item.color} value={item.value} />
       ))}

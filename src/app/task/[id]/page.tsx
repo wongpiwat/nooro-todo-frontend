@@ -95,6 +95,7 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
 
           <div className="flex flex-row">
             <ColorPicker
+              label="Color"
               value={form.color}
               items={[
                 { value: "red", color: "red" },
