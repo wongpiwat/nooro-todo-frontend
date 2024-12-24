@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Alert, Chip, Spinner } from "@nextui-org/react";
 import { MdAddCircleOutline } from "react-icons/md";
+import { LuNotepadText } from "react-icons/lu";
 
 import useFetchTasks from "@/hooks/useFetchTasks";
 import { deleteTask, updateTask } from "@/services/task.service";
@@ -153,14 +154,19 @@ export default function Home() {
                   />
                 ))
               ) : (
-                <>
-                  <div className="text font-bold text-gray-300">
-                    You don&#39;t have any tasks registered yet.
+                <div className="w-full lg:px-48">
+                  <div className="flex flex-col">
+                    <div className="flex items-center justify-center p-2">
+                      <LuNotepadText className="text-gray-400" size={64} />
+                    </div>
+                    <div className="text font-bold text-gray-300">
+                      You don&#39;t have any tasks registered yet.
+                    </div>
+                    <div className="text font-normal text-gray-300">
+                      Create tasks and organize your to-do items.
+                    </div>
                   </div>
-                  <div className="text font-normal text-gray-300">
-                    Create tasks and organize your to-do items.
-                  </div>
-                </>
+                </div>
               )}
             </div>
           </div>
