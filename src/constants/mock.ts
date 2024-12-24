@@ -1,10 +1,4 @@
-export interface Task {
-  id: string;
-  title: string;
-  color: string;
-  status: boolean;
-  timestamps: Date;
-}
+import { Task } from "@/types/Task";
 
 export const MOCK_TASKS: Task[] = [
   {
