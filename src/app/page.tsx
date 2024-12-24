@@ -2,18 +2,22 @@
 
 import React from "react";
 import { useRouter } from "next/navigation";
-import { Chip } from "@nextui-org/react";
+import { Alert, Chip, Spinner } from "@nextui-org/react";
 import { MdAddCircleOutline } from "react-icons/md";
-
-import { MOCK_TASKS } from "@/constants/mock";
 
 import Button from "@/components/button/Button";
 import TaskCard from "@/components/card/TaskCard";
 
 import Fade from "@/components/animation/Fade";
+import useFetchTasks from "@/hooks/useFetchTasks";
+import ConfirmationModal from "@/components/modal/ConfirmationModal";
+import { deleteTask } from "@/services/task.service";
 
 export default function Home() {
   const router = useRouter();
+  const { tasks, loading, error, refresh } = useFetchTasks();
+
+  const [deleteItemId, setDeleteItemId] = React.useState<string>("");
 
   const handleGoToCreateTask = () => {
     router.push(`/create`);
@@ -24,12 +28,46 @@ export default function Home() {
   };
 
   const handleSelectTask = (id: string) => {
-    console.log(`Selected Task: ${id}`);
+    console.log(`[DEBUG] Selected Task: ${id}`);
   };
 
-  const handleDeleteTask = (id: string) => {
-    console.log(`Deleted Task: ${id}`);
+  const handleSelectDeleteTask = (id: string) => {
+    console.log(`[DEBUG] Deleted Task: ${id}`);
+    setDeleteItemId(id);
   };
+
+  const handleDeselectDeleteTask = () => {
+    setDeleteItemId("");
+  };
+
+  const handleDeleteTask = async () => {
+    try {
+      console.log(`[DEBUG] Deleting Task: ${deleteItemId}`);
+      const data = await deleteTask(deleteItemId);
+      console.log(`[DEBUG] Deleted Task: ${data.id}`);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setDeleteItemId("");
+      refresh();
+    }
+  };
+
+  if (loading) {
+    return <Spinner color="primary" label="Loading..." labelColor="primary" />;
+  }
+
+  if (error) {
+    return (
+      <div>
+        <Alert
+          color="danger"
+          title={`Sorry, something went wrong.`}
+          description={error}
+        />
+      </div>
+    );
+  }
 
   return (
     <Fade id="0" isActive={true}>
@@ -51,7 +89,7 @@ export default function Home() {
                 content: "text-gray-200 font-bold",
               }}
             >
-              {MOCK_TASKS.length}
+              {tasks.length}
             </Chip>
           </div>
 
@@ -64,15 +102,14 @@ export default function Home() {
                 content: "text-gray-200 font-bold",
               }}
             >
-              {MOCK_TASKS.filter((task) => task.status).length} of{" "}
-              {MOCK_TASKS.length}
+              {tasks.filter((task) => task.status).length} of {tasks.length}
             </Chip>
           </div>
         </div>
 
         <div className="flex flex-col items-center justify-center gap-2">
-          {MOCK_TASKS.length > 0 ? (
-            MOCK_TASKS.map((task) => (
+          {tasks.length > 0 ? (
+            tasks.map((task) => (
               <TaskCard
                 key={task.id}
                 id={task.id}
@@ -81,7 +118,7 @@ export default function Home() {
                 status={task.status}
                 onPress={() => handleGoToDetailView(task.id)}
                 onSelect={handleSelectTask}
-                onDelete={handleDeleteTask}
+                onDelete={handleSelectDeleteTask}
               />
             ))
           ) : (
@@ -96,6 +133,15 @@ export default function Home() {
           )}
         </div>
       </div>
+      <ConfirmationModal
+        isOpen={!!deleteItemId}
+        Title={`Delete Task Id: ${deleteItemId}`}
+        description="Are you sure you want to delete this task?"
+        leftLabel="Cancel"
+        rightLabel="Delete"
+        onPress={() => handleDeleteTask()}
+        onClose={() => handleDeselectDeleteTask()}
+      />
     </Fade>
   );
 }

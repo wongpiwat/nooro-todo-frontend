@@ -1,39 +1,77 @@
 "use client";
 
-import React, { Usable, use, useState } from "react";
+import React, { Usable, use, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Button as NextUIButton } from "@nextui-org/react";
+import { Alert, Button as NextUIButton, Spinner } from "@nextui-org/react";
 import { MdAddCircleOutline } from "react-icons/md";
 import { MdArrowBack } from "react-icons/md";
 
-import Button from "@/components/button/Button";
+import useFetchTaskById from "@/hooks/useFetchTaskById";
+import { updateTask } from "@/services/task.service";
+import { DEFAULT_TASKS } from "@/constants/task";
+import { Task } from "@/types/Task";
 
+import Button from "@/components/button/Button";
+import ColorPicker from "@/components/picker/ColorPicker";
 import Fade from "@/components/animation/Fade";
 import TextField from "@/components/text-field/TextField";
-import ColorPicker from "@/components/picker/ColorPicker";
-import { MOCK_TASKS, Task } from "@/constants/mock";
 
 export default function Page({ params }: { params: Usable<never> }) {
   const router = useRouter();
   const { id } = use(params);
-  console.log("id", id);
-  const data = MOCK_TASKS.find((task) => task.id === id) as Task;
+  const { task, loading, error } = useFetchTaskById(id);
 
-  const [title, setTitle] = useState<string>(data.title);
-  const [selectedColor, setSelectedColor] = useState<string>(data.color);
+  useEffect(() => {
+    if (task) {
+      setForm(task);
+    }
+  }, [task]);
+
+  const [form, setForm] = useState<Task>(task || DEFAULT_TASKS);
 
   const handleBackToList = () => {
     router.push("/");
   };
+
   const handleChangeText = (value: string) => {
-    setTitle(value);
+    if (value) {
+      setForm((prev) => ({ ...prev, title: value }));
+    }
   };
 
-  const handleUpdateTask = () => {
-    console.log("Task Updated!");
+  const handleChangeColor = (value: string) => {
+    if (value) {
+      setForm((prev) => ({ ...prev, color: value }));
+    }
   };
 
-  console.log("selectedColor", selectedColor);
+  const handleUpdateTask = async () => {
+    try {
+      console.log("[DEBUG] Updating Task:", form);
+      const task = await updateTask(id, form);
+      console.log("[DEBUG] Updated Task:", task);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      router.push("/");
+    }
+  };
+
+  if (loading) {
+    return <Spinner color="primary" label="Loading..." labelColor="primary" />;
+  }
+
+  if (error) {
+    return (
+      <div>
+        <Alert
+          color="danger"
+          title={`Sorry, something went wrong.`}
+          description={error}
+        />
+      </div>
+    );
+  }
 
   return (
     <Fade id="2" isActive={true}>
@@ -49,14 +87,14 @@ export default function Page({ params }: { params: Usable<never> }) {
 
         <TextField
           label="Title"
-          value={title}
+          value={form.title}
           placeholder="Ex. Brush you teeth"
           onValueChange={handleChangeText}
         />
 
         <div className="flex flex-row">
           <ColorPicker
-            value={selectedColor}
+            value={form.color}
             items={[
               { value: "red", color: "red" },
               { value: "orange", color: "orange" },
@@ -67,7 +105,7 @@ export default function Page({ params }: { params: Usable<never> }) {
               { value: "pink", color: "pink" },
               { value: "brown", color: "brown" },
             ]}
-            onChange={(e) => setSelectedColor(e.target.value)}
+            onChange={(e) => handleChangeColor(e.target.value)}
             orientation="horizontal"
           />
         </div>

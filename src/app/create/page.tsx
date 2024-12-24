@@ -7,32 +7,43 @@ import { MdAddCircleOutline } from "react-icons/md";
 import { MdArrowBack } from "react-icons/md";
 
 import Button from "@/components/button/Button";
-
+import ColorPicker from "@/components/picker/ColorPicker";
 import Fade from "@/components/animation/Fade";
 import TextField from "@/components/text-field/TextField";
-import ColorPicker from "@/components/picker/ColorPicker";
+import { createTask } from "@/services/task.service";
+import { Task } from "@/types/Task";
+import { DEFAULT_TASKS } from "@/constants/task";
 
 export default function Page() {
   const router = useRouter();
-  const [title, setTitle] = useState<string>("");
-  const [color, setColor] = useState<string>("");
+  const [form, setForm] = useState<Task>(DEFAULT_TASKS);
 
   const handleBackToList = () => {
     router.push("/");
   };
   const handleChangeText = (value: string) => {
-    setTitle(value);
+    if (value) {
+      setForm((prev) => ({ ...prev, title: value }));
+    }
   };
 
   const handleChangeColor = (value: string) => {
-    setColor(value);
+    if (value) {
+      setForm((prev) => ({ ...prev, color: value }));
+    }
   };
 
-  const handleCreateTask = () => {
-    console.log("Task Updated!");
+  const handleCreateTask = async () => {
+    try {
+      console.log("[DEBUG] Creating Task:", form);
+      const createdTask = await createTask(form);
+      console.log("[DEBUG] Created Task:", createdTask);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      router.push("/");
+    }
   };
-
-  console.log("color", color);
 
   return (
     <Fade id="1" isActive={true}>
@@ -48,14 +59,14 @@ export default function Page() {
 
         <TextField
           label="Title"
-          value={title}
+          value={form.title}
           placeholder="Ex. Brush you teeth"
           onValueChange={handleChangeText}
         />
 
         <div className="flex flex-row">
           <ColorPicker
-            value={color}
+            value={form.color}
             items={[
               { value: "red", color: "red" },
               { value: "orange", color: "orange" },
