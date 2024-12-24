@@ -35,10 +35,12 @@ export default function RootLayout({
           <main className="flex h-screen flex-col overflow-hidden">
             <div className="flex min-h-36 justify-center">
               <div className="flex items-center justify-center p-16">
-                <div className="flex gap-1">
+                <div className="flex flex-row items-center gap-1">
                   <Rocket />
-                  <span className="text-2xl font-bold text-primary">Todo</span>
-                  <span className="text-2xl font-bold text-secondary-dark">
+                  <span className="text-[40px] font-black text-primary">
+                    Todo
+                  </span>
+                  <span className="text-[40px] font-black text-secondary-dark">
                     App
                   </span>
                 </div>
