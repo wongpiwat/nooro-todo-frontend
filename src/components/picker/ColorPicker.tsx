@@ -59,7 +59,7 @@ interface ColorPickerProps {
   onChange: ChangeEventHandler<HTMLInputElement>;
 }
 
-type ColorPickerType = ColorPickerProps & RadioGroupProps;
+type BaseColorPickerProps = ColorPickerProps & RadioGroupProps;
 
 const ColorPicker = ({
   label,
@@ -67,7 +67,7 @@ const ColorPicker = ({
   items,
   onChange,
   ...rest
-}: ColorPickerType) => {
+}: BaseColorPickerProps) => {
   return (
     <RadioGroup
       label={label}

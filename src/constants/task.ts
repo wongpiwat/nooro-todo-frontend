@@ -1,5 +1,5 @@
 export const DEFAULT_TASKS = {
-  id: "",
+  id: "id",
   title: "",
   color: "",
   status: false,

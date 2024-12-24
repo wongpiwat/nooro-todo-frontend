@@ -5,6 +5,7 @@ import {
   ModalBody,
   ModalFooter,
   Button,
+  ModalProps,
 } from "@nextui-org/react";
 
 interface ConfirmationModalProps {
@@ -17,6 +18,8 @@ interface ConfirmationModalProps {
   onClose: () => void;
 }
 
+type BaseConfirmationModalProps = ConfirmationModalProps & ModalProps;
+
 const ConfirmationModal = ({
   isOpen,
   Title,
@@ -25,7 +28,7 @@ const ConfirmationModal = ({
   rightLabel,
   onPress,
   onClose,
-}: ConfirmationModalProps) => {
+}: BaseConfirmationModalProps) => {
   return (
     <Modal
       isOpen={isOpen}
