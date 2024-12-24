@@ -6,13 +6,14 @@ import { Button as NextUIButton } from "@nextui-org/react";
 import { MdAddCircleOutline } from "react-icons/md";
 import { MdArrowBack } from "react-icons/md";
 
+import { createTask } from "@/services/task.service";
+import { DEFAULT_TASKS } from "@/constants/task";
+import { Task } from "@/types/Task";
+
 import Button from "@/components/button/Button";
 import ColorPicker from "@/components/picker/ColorPicker";
 import Fade from "@/components/animation/Fade";
 import TextField from "@/components/text-field/TextField";
-import { createTask } from "@/services/task.service";
-import { Task } from "@/types/Task";
-import { DEFAULT_TASKS } from "@/constants/task";
 
 export default function Page() {
   const router = useRouter();

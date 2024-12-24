@@ -66,7 +66,7 @@ export default function Page({ params }: { params: Usable<never> }) {
       <div>
         <Alert
           color="danger"
-          title={`Sorry, something went wrong.`}
+          title="Sorry, something went wrong."
           description={error}
         />
       </div>

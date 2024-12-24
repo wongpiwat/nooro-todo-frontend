@@ -48,11 +48,12 @@ const TaskCard = ({
   };
 
   const colorStyle = getColor(color);
+  const titleStyle = status ? "line-through text-gray-300" : "text-gray-100";
 
   return (
     <Card
       isPressable
-      className="border-1 border-gray-400 bg-gray-500 hover:bg-opacity-50"
+      className="flex w-full border-1 border-gray-400 bg-gray-500 hover:bg-opacity-50"
       onPress={onPress}
     >
       <CardBody className="flex flex-row">
@@ -68,17 +69,17 @@ const TaskCard = ({
                 colorStyle,
               ),
             }}
-            checked={status}
             // color="primary"
+            isSelected={status}
             radius="full"
             aria-label="Select task"
-            onClick={() => onSelect(id)}
+            onValueChange={() => onSelect(id)}
           />
         </div>
 
         {/* Title */}
         <div className="flex-grow">
-          <p className="text-sm leading-relaxed">{title}</p>
+          <p className={`text-sm leading-relaxed ${titleStyle}`}>{title}</p>
         </div>
 
         {/* Delete Icon */}

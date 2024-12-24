@@ -1,23 +1,23 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Alert, Chip, Spinner } from "@nextui-org/react";
 import { MdAddCircleOutline } from "react-icons/md";
 
-import Button from "@/components/button/Button";
-import TaskCard from "@/components/card/TaskCard";
-
-import Fade from "@/components/animation/Fade";
 import useFetchTasks from "@/hooks/useFetchTasks";
+import { deleteTask, updateTask } from "@/services/task.service";
+
 import ConfirmationModal from "@/components/modal/ConfirmationModal";
-import { deleteTask } from "@/services/task.service";
+import Button from "@/components/button/Button";
+import Fade from "@/components/animation/Fade";
+import TaskCard from "@/components/card/TaskCard";
 
 export default function Home() {
   const router = useRouter();
   const { tasks, loading, error, refresh } = useFetchTasks();
 
-  const [deleteItemId, setDeleteItemId] = React.useState<string>("");
+  const [deleteItemId, setDeleteItemId] = useState<string>("");
 
   const handleGoToCreateTask = () => {
     router.push(`/create`);
@@ -27,8 +27,9 @@ export default function Home() {
     router.push(`/task/${id}`);
   };
 
-  const handleSelectTask = (id: string) => {
+  const handleSelectTask = async (id: string) => {
     console.log(`[DEBUG] Selected Task: ${id}`);
+    await handleChangeStatus(id);
   };
 
   const handleSelectDeleteTask = (id: string) => {
@@ -38,6 +39,24 @@ export default function Home() {
 
   const handleDeselectDeleteTask = () => {
     setDeleteItemId("");
+  };
+
+  const handleChangeStatus = async (id: string) => {
+    try {
+      const task = tasks.find((task) => task.id === id);
+      if (!task) {
+        throw new Error(`[ERROR] Task not found: ${id}`);
+      }
+
+      console.log(`[DEBUG] Changing Status: ${id} - ${task?.status}`);
+      const newTask = { ...task, status: !task.status };
+      const data = await updateTask(id, newTask);
+      console.log(`[DEBUG] Changed Status: ${data.id} - ${data.status}`);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      refresh();
+    }
   };
 
   const handleDeleteTask = async () => {
@@ -62,7 +81,7 @@ export default function Home() {
       <div>
         <Alert
           color="danger"
-          title={`Sorry, something went wrong.`}
+          title="Sorry, something went wrong."
           description={error}
         />
       </div>
