@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { Button as NextUIButton } from "@nextui-org/react";
 import { MdAddCircleOutline } from "react-icons/md";
 import { MdArrowBack } from "react-icons/md";
+import { toast } from "react-toastify";
 
 import { createTask } from "@/services/task.service";
 import { DEFAULT_TASKS } from "@/constants/task";
@@ -39,8 +40,10 @@ export default function Page() {
       console.log("[DEBUG] Creating Task:", form);
       const createdTask = await createTask(form);
       console.log("[DEBUG] Created Task:", createdTask);
+      toast(`Task created!`, { type: "success" });
     } catch (err) {
       console.error(err);
+      toast(`Error creating task!`, { type: "error" });
     } finally {
       router.push("/");
     }

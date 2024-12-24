@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { Chip } from "@nextui-org/react";
 import { MdAddCircleOutline } from "react-icons/md";
 import { LuNotepadText } from "react-icons/lu";
+import { ToastContainer, toast } from "react-toastify";
 
 import useFetchTasks from "@/hooks/useFetchTasks";
 import { deleteTask, updateTask } from "@/services/task.service";
@@ -55,8 +56,12 @@ export default function Home() {
       const newTask = { ...task, status: !task.status };
       const data = await updateTask(id, newTask);
       console.log(`[DEBUG] Changed Status: ${data.id} - ${data.status}`);
+      toast(`Task ${data.status ? "completed" : "incompleted"}!`, {
+        type: data.status ? "info" : "warning",
+      });
     } catch (err) {
       console.error(err);
+      toast(`Error changing task status!`, { type: "error" });
     } finally {
       refresh();
     }
@@ -67,8 +72,10 @@ export default function Home() {
       console.log(`[DEBUG] Deleting Task: ${deleteItemId}`);
       const data = await deleteTask(deleteItemId);
       console.log(`[DEBUG] Deleted Task: ${data.id}`);
+      toast(`Task deleted!`, { type: "success" });
     } catch (err) {
       console.error(err);
+      toast(`Error deleting task!`, { type: "error" });
     } finally {
       setDeleteItemId("");
       refresh();
@@ -175,6 +182,12 @@ export default function Home() {
           />
         </div>
       </div>
+      <ToastContainer
+        containerId={1}
+        limit={2}
+        closeOnClick={true}
+        pauseOnHover={false}
+      />
     </Fade>
   );
 }

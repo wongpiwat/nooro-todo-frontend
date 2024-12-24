@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { Button as NextUIButton } from "@nextui-org/react";
 import { MdArrowBack } from "react-icons/md";
 import { FaCheck } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 import useFetchTaskById from "@/hooks/useFetchTaskById";
 import { updateTask } from "@/services/task.service";
@@ -52,10 +53,12 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
       console.log("[DEBUG] Updating Task:", form);
       const task = await updateTask(id, form);
       console.log("[DEBUG] Updated Task:", task);
+      toast(`Task updated!`, { type: "success" });
     } catch (err) {
       console.error(err);
+      toast(`Error updating task!`, { type: "error" });
     } finally {
-      router.push("/");
+      // router.push("/");
     }
   };
 
