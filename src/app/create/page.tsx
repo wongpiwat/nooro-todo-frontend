@@ -55,6 +55,7 @@ export default function Page() {
         <div className="flex flex-col gap-8">
           <NextUIButton
             isIconOnly
+            variant="light"
             className="bg-transparent text-white"
             onPress={handleBackToList}
             aria-label="Back"

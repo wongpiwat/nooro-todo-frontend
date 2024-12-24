@@ -76,6 +76,7 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
         <div className="flex flex-col gap-8">
           <NextUIButton
             isIconOnly
+            variant="light"
             className="bg-transparent text-white"
             onPress={handleBackToList}
             aria-label="Back"

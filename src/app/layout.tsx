@@ -32,8 +32,8 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <NextUIProvider>
-          <main className="flex h-screen flex-col overflow-hidden">
-            <div className="flex min-h-36 justify-center">
+          <main className="flex h-screen flex-col overflow-hidden bg-gray-600">
+            <div className="flex min-h-36 justify-center bg-background">
               <div className="flex items-center justify-center p-16">
                 <div className="flex flex-row items-center gap-1">
                   <Rocket />
