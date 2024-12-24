@@ -15,6 +15,8 @@ import Button from "@/components/button/Button";
 import ColorPicker from "@/components/picker/ColorPicker";
 import Fade from "@/components/animation/Fade";
 import TextField from "@/components/text-field/TextField";
+import Loading from "@/components/loading/Loading";
+import ErrorAlert from "@/components/alert/ErrorAlert";
 
 export default function Page({ params }: { params: Promise<{ id: string }> }) {
   const router = useRouter();
@@ -58,19 +60,11 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
   };
 
   if (loading) {
-    return <Spinner color="primary" label="Loading..." labelColor="primary" />;
+    return <Loading />;
   }
 
   if (error) {
-    return (
-      <div>
-        <Alert
-          color="danger"
-          title="Sorry, something went wrong."
-          description={error}
-        />
-      </div>
-    );
+    return <ErrorAlert message={error} />;
   }
 
   return (

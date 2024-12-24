@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Alert, Chip, Spinner } from "@nextui-org/react";
+import { Chip } from "@nextui-org/react";
 import { MdAddCircleOutline } from "react-icons/md";
 import { LuNotepadText } from "react-icons/lu";
 
@@ -13,6 +13,8 @@ import ConfirmationModal from "@/components/modal/ConfirmationModal";
 import Button from "@/components/button/Button";
 import Fade from "@/components/animation/Fade";
 import TaskCard from "@/components/card/TaskCard";
+import Loading from "@/components/loading/Loading";
+import ErrorAlert from "@/components/alert/ErrorAlert";
 
 export default function Home() {
   const router = useRouter();
@@ -74,19 +76,11 @@ export default function Home() {
   };
 
   if (loading) {
-    return <Spinner color="primary" label="Loading..." labelColor="primary" />;
+    return <Loading />;
   }
 
   if (error) {
-    return (
-      <div>
-        <Alert
-          color="danger"
-          title="Sorry, something went wrong."
-          description={error}
-        />
-      </div>
-    );
+    return <ErrorAlert message={error} />;
   }
 
   return (
