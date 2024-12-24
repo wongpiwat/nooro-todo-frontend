@@ -48,47 +48,49 @@ export default function Page() {
 
   return (
     <Fade id="1" isActive={true}>
-      <div className="flex flex-col gap-8">
-        <NextUIButton
-          isIconOnly
-          className="bg-transparent text-white"
-          onPress={handleBackToList}
-          aria-label="Back"
-        >
-          <MdArrowBack size={18} />
-        </NextUIButton>
+      <div className="flex flex-col items-center justify-center pt-8">
+        <div className="flex flex-col gap-8">
+          <NextUIButton
+            isIconOnly
+            className="bg-transparent text-white"
+            onPress={handleBackToList}
+            aria-label="Back"
+          >
+            <MdArrowBack size={18} />
+          </NextUIButton>
 
-        <TextField
-          label="Title"
-          value={form.title}
-          placeholder="Ex. Brush you teeth"
-          onValueChange={handleChangeText}
-        />
-
-        <div className="flex flex-row">
-          <ColorPicker
-            value={form.color}
-            items={[
-              { value: "red", color: "red" },
-              { value: "orange", color: "orange" },
-              { value: "yellow", color: "yellow" },
-              { value: "green", color: "green" },
-              { value: "blue", color: "blue" },
-              { value: "purple", color: "purple" },
-              { value: "pink", color: "pink" },
-              { value: "brown", color: "brown" },
-            ]}
-            onChange={(e) => handleChangeColor(e.target.value)}
-            orientation="horizontal"
+          <TextField
+            label="Title"
+            value={form.title}
+            placeholder="Ex. Brush you teeth"
+            onValueChange={handleChangeText}
           />
-        </div>
 
-        <Button
-          onClick={handleCreateTask}
-          endComponent={<MdAddCircleOutline size={18} />}
-        >
-          Add Task
-        </Button>
+          <div className="flex flex-row">
+            <ColorPicker
+              value={form.color}
+              items={[
+                { value: "red", color: "red" },
+                { value: "orange", color: "orange" },
+                { value: "yellow", color: "yellow" },
+                { value: "green", color: "green" },
+                { value: "blue", color: "blue" },
+                { value: "purple", color: "purple" },
+                { value: "pink", color: "pink" },
+                { value: "brown", color: "brown" },
+              ]}
+              onChange={(e) => handleChangeColor(e.target.value)}
+              orientation="horizontal"
+            />
+          </div>
+
+          <Button
+            onClick={handleCreateTask}
+            endComponent={<MdAddCircleOutline size={18} />}
+          >
+            Add Task
+          </Button>
+        </div>
       </div>
     </Fade>
   );

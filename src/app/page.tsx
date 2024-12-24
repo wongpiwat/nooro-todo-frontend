@@ -27,9 +27,9 @@ export default function Home() {
     router.push(`/task/${id}`);
   };
 
-  const handleSelectTask = async (id: string) => {
+  const handleSelectTask = (id: string) => {
     console.log(`[DEBUG] Selected Task: ${id}`);
-    await handleChangeStatus(id);
+    handleChangeStatus(id);
   };
 
   const handleSelectDeleteTask = (id: string) => {
@@ -90,77 +90,91 @@ export default function Home() {
 
   return (
     <Fade id="0" isActive={true}>
-      <div className="flex flex-col gap-8">
-        <Button
-          onClick={handleGoToCreateTask}
-          endComponent={<MdAddCircleOutline size={18} />}
-        >
-          Create Task
-        </Button>
+      <div className="sticky top-0 z-10 h-5 bg-background"></div>
+      <div className="flex flex-col items-center justify-center gap-8 bg-gray-600">
+        <div className="flex flex-col gap-4">
+          <div className="sticky top-0 z-20 flex flex-col gap-16 border-gray-600 bg-gray-600 pb-2">
+            <div className="flex flex-col">
+              <Button
+                onClick={handleGoToCreateTask}
+                endComponent={<MdAddCircleOutline size={18} />}
+              >
+                Create Task
+              </Button>
+            </div>
 
-        <div className="flex flex-row justify-between">
-          <div className="flex flex-row gap-1">
-            <div className="text font-bold text-primary-light">Tasks</div>
-            <Chip
-              size="sm"
-              classNames={{
-                base: "bg-gray-400 px-1.5",
-                content: "text-gray-200 font-bold",
-              }}
-            >
-              {tasks.length}
-            </Chip>
+            <div className="">
+              <div className="flex flex-row justify-between">
+                <div className="flex flex-row gap-1">
+                  <div className="text font-bold text-primary-light">Tasks</div>
+                  <Chip
+                    size="sm"
+                    classNames={{
+                      base: "bg-gray-400 px-1.5",
+                      content: "text-gray-200 font-bold",
+                    }}
+                  >
+                    {tasks.length}
+                  </Chip>
+                </div>
+
+                <div className="flex flex-row gap-1">
+                  <div className="text font-bold text-secondary-light">
+                    Completed
+                  </div>
+                  <Chip
+                    size="sm"
+                    classNames={{
+                      base: "bg-gray-400 px-1.5",
+                      content: "text-gray-200 font-bold",
+                    }}
+                  >
+                    {tasks.filter((task) => task.status).length} of{" "}
+                    {tasks.length}
+                  </Chip>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <div className="flex flex-row gap-1">
-            <div className="text font-bold text-secondary-light">Completed</div>
-            <Chip
-              size="sm"
-              classNames={{
-                base: "bg-gray-400 px-1.5",
-                content: "text-gray-200 font-bold",
-              }}
-            >
-              {tasks.filter((task) => task.status).length} of {tasks.length}
-            </Chip>
+          <div className="max-h-full overflow-y-auto">
+            <div className="flex flex-col items-center justify-center gap-4">
+              {tasks.length > 0 ? (
+                tasks.map((task) => (
+                  <TaskCard
+                    key={task.id}
+                    id={task.id}
+                    title={task.title}
+                    color={task.color}
+                    status={task.status}
+                    onPress={() => handleGoToDetailView(task.id)}
+                    onSelect={handleSelectTask}
+                    onDelete={handleSelectDeleteTask}
+                  />
+                ))
+              ) : (
+                <>
+                  <div className="text font-bold text-gray-300">
+                    You don&#39;t have any tasks registered yet.
+                  </div>
+                  <div className="text font-normal text-gray-300">
+                    Create tasks and organize your to-do items.
+                  </div>
+                </>
+              )}
+            </div>
           </div>
-        </div>
-
-        <div className="flex flex-col items-center justify-center gap-2">
-          {tasks.length > 0 ? (
-            tasks.map((task) => (
-              <TaskCard
-                key={task.id}
-                id={task.id}
-                title={task.title}
-                color={task.color}
-                status={task.status}
-                onPress={() => handleGoToDetailView(task.id)}
-                onSelect={handleSelectTask}
-                onDelete={handleSelectDeleteTask}
-              />
-            ))
-          ) : (
-            <>
-              <div className="text font-bold text-gray-300">
-                You don&#39;t have any tasks registered yet.
-              </div>
-              <div className="text font-normal text-gray-300">
-                Create tasks and organize your to-do items.
-              </div>
-            </>
-          )}
+          <ConfirmationModal
+            isOpen={!!deleteItemId}
+            Title={`Delete Task Id: ${deleteItemId}`}
+            description="Are you sure you want to delete this task?"
+            leftLabel="Cancel"
+            rightLabel="Delete"
+            onPress={() => handleDeleteTask()}
+            onClose={() => handleDeselectDeleteTask()}
+          />
         </div>
       </div>
-      <ConfirmationModal
-        isOpen={!!deleteItemId}
-        Title={`Delete Task Id: ${deleteItemId}`}
-        description="Are you sure you want to delete this task?"
-        leftLabel="Cancel"
-        rightLabel="Delete"
-        onPress={() => handleDeleteTask()}
-        onClose={() => handleDeselectDeleteTask()}
-      />
     </Fade>
   );
 }

@@ -29,6 +29,7 @@ const ConfirmationModal = ({
   return (
     <Modal
       isOpen={isOpen}
+      onClose={onClose}
       classNames={{
         base: "bg-gray-500",
       }}
