@@ -93,7 +93,7 @@ export default function Home() {
   return (
     <Fade id="0" isActive={true}>
       <div className="sticky top-0 z-10 h-5 bg-background"></div>
-      <div className="flex flex-col items-center justify-center gap-8 bg-gray-600">
+      <div className="-m-5 flex flex-col items-center justify-center gap-8 bg-gray-600">
         <div className="flex flex-col gap-4">
           <div className="sticky top-0 z-20 flex flex-col gap-16 border-gray-600 bg-gray-600 pb-2">
             <div className="flex flex-col">
@@ -107,7 +107,7 @@ export default function Home() {
 
             <div className="">
               <div className="flex flex-row justify-between">
-                <div className="flex flex-row gap-1">
+                <div className="flex flex-row gap-2">
                   <div className="text font-bold text-primary-light">Tasks</div>
                   <Chip
                     size="sm"
@@ -120,7 +120,7 @@ export default function Home() {
                   </Chip>
                 </div>
 
-                <div className="flex flex-row gap-1">
+                <div className="flex flex-row gap-2">
                   <div className="text font-bold text-secondary-light">
                     Completed
                   </div>
@@ -185,6 +185,7 @@ export default function Home() {
       <ToastContainer
         containerId={1}
         limit={2}
+        autoClose={1000}
         closeOnClick={true}
         pauseOnHover={false}
       />
