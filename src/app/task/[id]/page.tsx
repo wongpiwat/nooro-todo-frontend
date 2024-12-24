@@ -16,7 +16,7 @@ import ColorPicker from "@/components/picker/ColorPicker";
 import Fade from "@/components/animation/Fade";
 import TextField from "@/components/text-field/TextField";
 
-export default function Page({ params }: { params: Usable<never> }) {
+export default function Page({ params }: { params: Usable<{ id: string }> }) {
   const router = useRouter();
   const { id } = use(params);
   const { task, loading, error } = useFetchTaskById(id);
