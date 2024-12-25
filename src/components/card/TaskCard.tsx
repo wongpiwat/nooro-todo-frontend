@@ -58,7 +58,7 @@ const TaskCard = ({
     >
       <CardBody className="flex flex-row">
         {/* Radio Button */}
-        <div>
+        <div className="pt-1">
           <Checkbox
             classNames={{
               wrapper: cn(

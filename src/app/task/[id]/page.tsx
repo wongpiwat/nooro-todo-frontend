@@ -31,7 +31,7 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
     control,
     handleSubmit,
     setValue,
-    watch,
+    // watch,
     reset,
     formState: { errors },
   } = useForm<Task>({
@@ -79,75 +79,78 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
     return <ErrorAlert message={error} />;
   }
 
-  console.log("[DEBUG] watch:", JSON.stringify(watch(), null, 2));
-  console.log("[DEBUG] errors:", errors);
+  // console.log("[DEBUG] watch:", JSON.stringify(watch(), null, 2));
+  // console.log("[DEBUG] errors:", errors);
 
   return (
-    <Fade id="2" isActive={true}>
-      <div className="flex flex-col items-center justify-center px-4 pt-8">
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="flex flex-col gap-8">
-            <NextUIButton
-              isIconOnly
-              variant="light"
-              className="bg-transparent text-white"
-              onPress={handleBackToList}
-              aria-label="Back"
-            >
-              <MdArrowBack size={18} />
-            </NextUIButton>
+    <Fade id="edit" isActive={true}>
+      <div className="flex flex-col items-center justify-center">
+        <div className="flex w-full max-w-screen-sm flex-col px-4 pt-8">
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className="flex flex-col gap-8">
+              <NextUIButton
+                isIconOnly
+                variant="light"
+                className="bg-transparent text-white"
+                onPress={handleBackToList}
+                aria-label="Back"
+              >
+                <MdArrowBack size={18} />
+              </NextUIButton>
 
-            <Controller
-              name="title"
-              control={control}
-              render={({ field }) => (
-                <TextField
-                  {...field}
-                  label="Title"
-                  name={field.name}
-                  value={field.value}
-                  placeholder="Ex. Brush you teeth"
-                  isInvalid={Boolean(errors.title)}
-                  errorMessage={errors.title?.message}
-                  onValueChange={(value) => field.onChange(value)}
-                />
-              )}
-            />
-
-            <div className="flex flex-row">
               <Controller
-                name="color"
+                name="title"
                 control={control}
                 render={({ field }) => (
-                  <ColorPicker
+                  <TextField
                     {...field}
-                    label="Color"
+                    size="lg"
+                    label="Title"
                     name={field.name}
                     value={field.value}
-                    isInvalid={Boolean(errors.color)}
-                    errorMessage={errors.color?.message}
-                    items={[
-                      { value: "red", color: "red" },
-                      { value: "orange", color: "orange" },
-                      { value: "yellow", color: "yellow" },
-                      { value: "green", color: "green" },
-                      { value: "blue", color: "blue" },
-                      { value: "purple", color: "purple" },
-                      { value: "pink", color: "pink" },
-                      { value: "brown", color: "brown" },
-                    ]}
-                    onChange={(e) => field.onChange(e.target.value)}
-                    orientation="horizontal"
+                    placeholder="Ex. Brush you teeth"
+                    isInvalid={Boolean(errors.title)}
+                    errorMessage={errors.title?.message}
+                    onValueChange={(value) => field.onChange(value)}
                   />
                 )}
               />
-            </div>
 
-            <Button type="submit" endComponent={<FaCheck size={16} />}>
-              Save
-            </Button>
-          </div>
-        </form>
+              <div className="flex flex-row">
+                <Controller
+                  name="color"
+                  control={control}
+                  render={({ field }) => (
+                    <ColorPicker
+                      {...field}
+                      label="Color"
+                      name={field.name}
+                      value={field.value}
+                      isInvalid={Boolean(errors.color)}
+                      errorMessage={errors.color?.message}
+                      items={[
+                        { value: "red", color: "red" },
+                        { value: "orange", color: "orange" },
+                        { value: "yellow", color: "yellow" },
+                        { value: "green", color: "green" },
+                        { value: "blue", color: "blue" },
+                        { value: "purple", color: "purple" },
+                        { value: "pink", color: "pink" },
+                        { value: "brown", color: "brown" },
+                      ]}
+                      onChange={(e) => field.onChange(e.target.value)}
+                      orientation="horizontal"
+                    />
+                  )}
+                />
+              </div>
+
+              <Button type="submit" endComponent={<FaCheck size={16} />}>
+                Save
+              </Button>
+            </div>
+          </form>
+        </div>
       </div>
     </Fade>
   );

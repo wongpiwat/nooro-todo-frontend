@@ -91,7 +91,7 @@ export default function Home() {
   }
 
   return (
-    <Fade id="0" isActive={true}>
+    <Fade id="list" isActive={true}>
       <div className="sticky top-0 z-10 h-5 bg-background"></div>
       <div className="-mt-5 flex flex-col items-center justify-center gap-8 bg-gray-600 px-4">
         <div className="flex flex-col gap-4">
@@ -140,7 +140,7 @@ export default function Home() {
           </div>
 
           <div className="max-h-full overflow-y-auto">
-            <div className="flex flex-col items-center justify-center gap-4">
+            <div className="flex max-w-screen-sm flex-col items-center justify-center gap-4">
               {tasks.length > 0 ? (
                 tasks.map((task) => (
                   <TaskCard
