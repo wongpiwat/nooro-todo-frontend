@@ -33,7 +33,7 @@ export default function RootLayout({
       >
         <NextUIProvider>
           <main className="flex h-screen flex-col overflow-hidden bg-gray-600">
-            <div className="flex h-24 min-h-24 justify-center bg-background sm:h-48 sm:min-h-48">
+            <div className="flex h-24 min-h-24 justify-center bg-gray-700 sm:h-48 sm:min-h-48">
               <div className="flex items-center justify-center p-16">
                 <div className="flex flex-row items-center gap-1">
                   <Rocket />

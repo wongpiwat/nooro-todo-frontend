@@ -90,7 +90,7 @@ export default function Home() {
 
   return (
     <Fade id="list" isActive={true}>
-      <div className="sticky top-0 z-10 h-5 bg-background"></div>
+      <div className="sticky top-0 z-10 h-5 bg-gray-700"></div>
       <div className="-mt-5 flex flex-col items-center justify-center gap-8 bg-gray-600 px-4">
         <div className="flex w-full max-w-screen-sm flex-col gap-4">
           <div className="sticky top-0 z-20 flex flex-col gap-16 border-gray-600 bg-gray-600 pb-2">
