@@ -34,3 +34,12 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Set Environment Variables
+
+Next.js uses the [`.env.local`](https://nextjs.org/docs/basic-features/environment-variables) file to inject environment variables into the app. The file is loaded on the server and client side.
+
+```bash
+# .env.local
+NEXT_PUBLIC_API_ENDPOINT=API_ENDPOINT
+```
