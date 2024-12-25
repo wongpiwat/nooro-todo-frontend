@@ -32,12 +32,10 @@ export default function Home() {
   };
 
   const handleSelectTask = (id: string) => {
-    console.log(`[DEBUG] Selected Task: ${id}`);
     handleChangeStatus(id);
   };
 
   const handleSelectDeleteTask = (id: string) => {
-    console.log(`[DEBUG] Deleted Task: ${id}`);
     setDeleteItemId(id);
   };
 
@@ -57,7 +55,7 @@ export default function Home() {
       const data = await updateTask(id, newTask);
       console.log(`[DEBUG] Changed Status: ${data.id} - ${data.status}`);
       toast(`Task ${data.status ? "completed" : "incompleted"}!`, {
-        type: data.status ? "info" : "warning",
+        type: data.status ? "info" : "warning"
       });
     } catch (err) {
       console.error(err);
@@ -93,8 +91,8 @@ export default function Home() {
   return (
     <Fade id="list" isActive={true}>
       <div className="sticky top-0 z-10 h-5 bg-background"></div>
-      <div className="-mt-5 flex flex-col items-center justify-center gap-8 bg-gray-600 px-4">
-        <div className="flex flex-col gap-4">
+      <div className="-mt-5 items-center justify-center flex flex-col gap-8 bg-gray-600 px-4">
+        <div className="flex max-w-screen-sm w-full  flex-col gap-4">
           <div className="sticky top-0 z-20 flex flex-col gap-16 border-gray-600 bg-gray-600 pb-2">
             <div className="flex flex-col">
               <Button
@@ -113,7 +111,7 @@ export default function Home() {
                     size="sm"
                     classNames={{
                       base: "bg-gray-400 px-1.5",
-                      content: "text-gray-200 font-bold",
+                      content: "text-gray-200 font-bold"
                     }}
                   >
                     {tasks.length}
@@ -128,7 +126,7 @@ export default function Home() {
                     size="sm"
                     classNames={{
                       base: "bg-gray-400 px-1.5",
-                      content: "text-gray-200 font-bold",
+                      content: "text-gray-200 font-bold"
                     }}
                   >
                     {tasks.filter((task) => task.status).length} of{" "}
@@ -140,7 +138,7 @@ export default function Home() {
           </div>
 
           <div className="max-h-full overflow-y-auto">
-            <div className="flex max-w-screen-sm flex-col items-center justify-center gap-4">
+            <div className="flex flex-col justify-center gap-4">
               {tasks.length > 0 ? (
                 tasks.map((task) => (
                   <TaskCard
@@ -155,17 +153,15 @@ export default function Home() {
                   />
                 ))
               ) : (
-                <div className="w-full lg:px-48">
-                  <div className="flex flex-col">
-                    <div className="flex items-center justify-center p-2">
-                      <LuNotepadText className="text-gray-400" size={64} />
-                    </div>
-                    <div className="text font-bold text-gray-300">
-                      You don&#39;t have any tasks registered yet.
-                    </div>
-                    <div className="text font-normal text-gray-300">
-                      Create tasks and organize your to-do items.
-                    </div>
+                <div className="flex flex-col items-center justify-center text-center gap-4">
+                  <div className="flex p-2">
+                    <LuNotepadText className="text-gray-400" size={64} />
+                  </div>
+                  <div className="text font-bold text-gray-300">
+                    You don&#39;t have any tasks registered yet.
+                  </div>
+                  <div className="text font-normal text-gray-300">
+                    Create tasks and organize your to-do items.
                   </div>
                 </div>
               )}
