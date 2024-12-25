@@ -138,7 +138,7 @@ export default function Home() {
           </div>
 
           <div className="max-h-full overflow-y-auto">
-            <div className="flex flex-col justify-center gap-4 pb-28">
+            <div className="flex flex-col justify-center gap-4 pb-36">
               {tasks.length > 0 ? (
                 tasks.map((task) => (
                   <TaskCard
