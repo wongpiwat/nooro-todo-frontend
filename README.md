@@ -43,3 +43,36 @@ Next.js uses the [`.env.local`](https://nextjs.org/docs/basic-features/environme
 # .env.local
 NEXT_PUBLIC_API_ENDPOINT=API_ENDPOINT
 ```
+
+## Project Structure
+
+The project structure is as follows:
+
+```bash
+.
+├── src
+│   ├── app
+│   │   ├── components
+│   │   ├── constants
+│   │   ├── hooks
+│   │   ├── schemas
+│   │   ├── services
+│   │   ├── types
+│   │   └── utils
+├── .env.example
+├── .env.local
+├── .gitignore
+├── .prettierrc
+├── eslint.config.mjs
+├── next.config.ts
+├── next-env.d.ts
+├── package.json
+├── package-lock.json
+├── postcss.config.js
+├── README.md
+├── tailwind.config.js
+├── tsconfig.json
+└── yarn.lock
+```
+
+
