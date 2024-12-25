@@ -1,5 +1,5 @@
 import React from "react";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -19,6 +19,16 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Nooro Todo Application",
   description: "A simple todo application",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1.0,
+  maximumScale: 1.0,
+  minimumScale: 1.0,
+  userScalable: false,
+  colorScheme: "dark",
+  themeColor: "#0D0D0D",
 };
 
 export default function RootLayout({
