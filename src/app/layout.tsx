@@ -46,7 +46,7 @@ export default function RootLayout({
                 </div>
               </div>
             </div>
-            <div className="max-h-full overflow-y-auto bg-gray-600">
+            <div className="max-h-full overflow-y-auto overscroll-none bg-gray-600">
               {children}
             </div>
             {/*<div className="bg-gray-600 p-4"></div>*/}
