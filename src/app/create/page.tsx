@@ -60,7 +60,7 @@ export default function Page() {
 
   return (
     <Fade id="1" isActive={true}>
-      <div className="flex flex-col items-center justify-center pt-8">
+      <div className="flex flex-col items-center justify-center px-4 pt-8">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="flex flex-col gap-8">
             <NextUIButton
