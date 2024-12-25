@@ -77,12 +77,10 @@ The project structure is as follows:
 
 ## Screenshots
 
+<img src="https://github.com/user-attachments/assets/2222a073-a475-4d37-af72-8065ed88f13b" width="auto" height="420">
+<img src="https://github.com/user-attachments/assets/aefac016-485a-4305-8d1b-8db26a3c8787" width="auto" height="420">
 <img src="https://github.com/user-attachments/assets/268e84d2-c631-4e3a-bdde-1e0e5d0d4d29" width="auto" height="400">
 <img src="https://github.com/user-attachments/assets/0ac2681f-caba-4165-ba29-42b65d782f77" width="auto" height="400">
 <img src="https://github.com/user-attachments/assets/b94ca888-c2ab-498a-ae04-0778b26ccad9" width="auto" height="400">
 <img src="https://github.com/user-attachments/assets/c5f87e54-ac04-471d-88cf-9de0131fa5ab" width="auto" height="400">
 <img src="https://github.com/user-attachments/assets/5bd390c7-7282-45cc-9528-852bb106ebdf" width="auto" height="400">
-<img src="https://github.com/user-attachments/assets/2222a073-a475-4d37-af72-8065ed88f13b" width="auto" height="420">
-<img src="https://github.com/user-attachments/assets/aefac016-485a-4305-8d1b-8db26a3c8787" width="auto" height="420">
-
-
