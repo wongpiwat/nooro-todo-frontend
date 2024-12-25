@@ -12,7 +12,7 @@ import { toast } from "react-toastify";
 import useFetchTaskById from "@/hooks/useFetchTaskById";
 import { updateTask } from "@/services/task.service";
 import { schema } from "@/schemas/task.schema";
-import { DEFAULT_TASKS } from "@/constants/task";
+import { DEFAULT_TASKS, TASK_COLORS } from "@/constants/task";
 import { Task } from "@/types/Task";
 
 import Button from "@/components/button/Button";
@@ -128,16 +128,7 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
                       value={field.value}
                       isInvalid={Boolean(errors.color)}
                       errorMessage={errors.color?.message}
-                      items={[
-                        { value: "red", color: "red" },
-                        { value: "orange", color: "orange" },
-                        { value: "yellow", color: "yellow" },
-                        { value: "green", color: "green" },
-                        { value: "blue", color: "blue" },
-                        { value: "purple", color: "purple" },
-                        { value: "pink", color: "pink" },
-                        { value: "brown", color: "brown" },
-                      ]}
+                      items={TASK_COLORS}
                       onChange={(e) => field.onChange(e.target.value)}
                       orientation="horizontal"
                     />
