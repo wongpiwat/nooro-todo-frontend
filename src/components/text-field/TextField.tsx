@@ -13,6 +13,7 @@ const TextField = ({ label, placeholder, ...rest }: TextFieldType) => {
       classNames={{
         label: ["!text-primary", "!dark:text-primary", "text-sm", "font-bold"],
         inputWrapper: [
+          "text-white",
           "bg-gray-500",
           "dark:bg-gray-500",
           "hover:bg-gray-600",
